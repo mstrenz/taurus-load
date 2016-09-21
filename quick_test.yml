@@ -1,0 +1,11 @@
+---
+scenarios:
+  simple:
+    requests:
+    - https://qa-www.readytalk.com/ 
+
+execution:
+  concurrency: 10
+  ramp-up: 1s
+  hold-for: 1m
+  scenario: simple
