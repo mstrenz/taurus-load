@@ -1,4 +1,23 @@
 ---
+services:
+- module: passfail
+  criteria:
+  - subject: avg-rt  # required
+    label: ''  # optional, default is ''
+    condition: '>'  # required
+    threshold: 50ms  # required
+    timeframe: 1m 
+    logic: for  # optional, logic to aggregate values within timeframe. 
+                # Default 'for' means take latest, 
+                # 'within' means take sum/avg of all values within interval
+    fail: true  # optional, default is true
+    stop: true  # optional, default is true
+
+reporting:
+- module: junit-xml
+  data-source: pass-fail
+- module: final_stats
+  dump-csv: results.csv
 scenarios:
   simple:
     requests:
@@ -6,6 +25,6 @@ scenarios:
 
 execution:
   concurrency: 10
-  ramp-up: 1s
+  ramp-up: 30ms
   hold-for: 1m
   scenario: simple
