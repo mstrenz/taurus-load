@@ -8,6 +8,7 @@ RUN pip3 install --upgrade bzt
 RUN rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/*
 
 COPY quick_test.yml /root/
+COPY site_test.yml /root/
 WORKDIR /root
 RUN bzt quick_test.yml
 RUN rm -r /root/*-*-*_*-*-*.*
@@ -15,4 +16,4 @@ RUN chmod a+x .bzt/jmeter-taurus/bin/jmeter .bzt/jmeter-taurus/bin/jmeter-server
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter-server
 
-CMD bzt quick_test.yml
+CMD bzt site_test.yml
