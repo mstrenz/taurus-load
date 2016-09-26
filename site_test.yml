@@ -2,28 +2,45 @@
 services:
 - module: passfail
   criteria:
-  - rc4??>0 for 1s, stop as failed
-  - rc5??>0 for 1s, stop as failed
-  - avg-rt of Website>50ms for 30s, stop as failed
-  - avg-rt of Blog>50ms for 30s, stop as failed
-  - succ<100% for 1s, stop as failed
-
+# GENERIC TESTS
+   - rc4??>0 for 1s, stop as failed
+   - rc5??>0 for 1s, stop as failed
+   - succ<100% for 1s, stop as failed
+# BLOG TESTS
+   - avg-rt of BlogLow>10s for 10s, stop as failed
+   - avg-rt of BlogMed>20s for 20s, stop as failed
+   - avg-rt of BlogHigh>30s for 30s, stop as failed
+# WEBSITE TESTS
+#   - avg-rt of Website>10s for 5s, stop as failed
 
 reporting:
+# PRODUCED JUNIT RESULTS FOR JENKINS?
 - module: junit-xml
   data-source: pass-fail
+# WRITES RESULTS TO CSV
 - module: final_stats
+  data-source: pass-fail
   dump-csv: results.csv
 
 execution:
-- concurrency: 1
-  ramp-up: 30ms
-  hold-for: 30s
-  scenario: Blog
+#-  concurrency: 5
+#   ramp-up: 1s
+#   hold-for: 30s
+#   scenario: Website
 - concurrency: 5
-  ramp-up: 30ms
-  hold-for: 1m
-  scenario: Website
+  ramp-up: 1s
+  hold-for: 10s
+  scenario: BlogLow
+- concurrency: 15
+  ramp-up: 1s
+  hold-for: 20s
+  delay: 35s
+  scenario: BlogMed
+- concurrency: 25
+  ramp-up: 1s
+  hold-for: 30s
+  delay: 60s
+  scenario: BlogHigh
 
 scenarios:
   Website:
@@ -31,8 +48,21 @@ scenarios:
     requests:
     - label: Website
       url: https://qa-www.readytalk.com/
-  Blog:
+  BlogLow:
     timeout: 30s
+    retrieve-resources: false
     requests:
-    - label: Blog
-      url: https://blog.blue.wwwtst.ecovate.com/
+    - label: BlogLow
+      url: https://blog.blue.iwa.ecovate.com/
+  BlogMed:
+    timeout: 30s
+    retrieve-resources: false
+    requests:
+    - label: BlogMed
+      url: https://blog.blue.iwa.ecovate.com/
+  BlogHigh:
+    timeout: 30s
+    retrieve-resources: false
+    requests:
+    - label: BlogHigh
+      url: https://blog.blue.iwa.ecovate.com/
