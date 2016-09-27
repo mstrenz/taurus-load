@@ -18,6 +18,8 @@ RUN chmod a+x .bzt/jmeter-taurus/bin/jmeter .bzt/jmeter-taurus/bin/jmeter-server
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter-server
 
+VOLUME /results
+
 CMD bzt \
     -o scenarios.low.requests="['${test}']" \
     -o scenarios.med.requests="['${test}']" \

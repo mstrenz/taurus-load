@@ -18,7 +18,7 @@ reporting:
 # WRITES RESULTS TO CSV
 - module: final_stats
   data-source: pass-fail
-  dump-csv: results.csv
+  dump-csv: /results/results.csv
 
 execution:
 - concurrency: 5
