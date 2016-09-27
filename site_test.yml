@@ -24,17 +24,17 @@ execution:
 - concurrency: 5
   ramp-up: 1s
   hold-for: 60s
-  scenario: Low
+  scenario: low
 - concurrency: 15
   ramp-up: 1s
   hold-for: 60s
   delay: 60s
-  scenario: Med
+  scenario: med
 - concurrency: 25
   ramp-up: 1s
   hold-for: 60s
   delay: 2m
-  scenario: High
+  scenario: high
 
 scenarios:
   low:
