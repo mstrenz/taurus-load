@@ -11,4 +11,4 @@ any 500 error codes
 
 
 # Step 1 : pull/start container
-docker run -e test={https://qa-www.readytalk.com/blog} --rm -it --name taurus-load mstrenz/taurus-load
+docker run -e test={https://qa-www.readytalk.com/blog} --rm -it mstrenz/taurus-load
