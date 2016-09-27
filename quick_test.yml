@@ -1,4 +1,9 @@
 ---
+reporting:
+# WRITES RESULTS TO CSV
+- module: final_stats
+  dump-csv: results.csv
+
 execution:
 - concurrency: 1
   ramp-up: 1ms
@@ -8,4 +13,4 @@ execution:
 scenarios:
   quick-test:
     requests:
-    - https://www.readytalk.com
+    - url: https://qa-www.readytalk.com/ 
