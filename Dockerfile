@@ -19,14 +19,15 @@ ENV HOME /tmp/load
 COPY quick_test.yml /tmp/load
 COPY site_test.yml /tmp/load
 
+VOLUME /results
+RUN chmod a+w /results /tmp/load
+
 RUN bzt quick_test.yml
 RUN rm -r /tmp/load/*-*-*_*-*-*.*
 RUN chmod a+x .bzt/jmeter-taurus/bin/jmeter .bzt/jmeter-taurus/bin/jmeter-server .bzt/jmeter-taurus/bin/*.sh
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter-server
 
-VOLUME /results
-RUN chmod a+w /results
 
 CMD bzt \
     -o scenarios.load.requests="['${url}']" \
