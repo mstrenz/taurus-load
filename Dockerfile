@@ -16,8 +16,8 @@ RUN mkdir /tmp/load
 WORKDIR /tmp/load
 ENV HOME /tmp/load
 
-COPY quick_test.yml /root/
-COPY site_test.yml /root/
+COPY quick_test.yml /tmp/load
+COPY site_test.yml /tmp/load
 
 RUN bzt quick_test.yml
 RUN rm -r /tmp/load/*-*-*_*-*-*.*
