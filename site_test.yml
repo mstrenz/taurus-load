@@ -7,9 +7,7 @@ services:
    - rc5??>0 for 1s, stop as failed
    - succ<100% for 1s, stop as failed
 # RESPONSE TIME TESTS
-   - avg-rt of low>10s for 10s, stop as failed
-   - avg-rt of med>20s for 20s, stop as failed
-   - avg-rt of high>30s for 30s, stop as failed
+   - avg-rt of load>10s for 10s, stop as failed
 
 reporting:
 # PRODUCED JUNIT RESULTS FOR JENKINS?
@@ -24,35 +22,12 @@ execution:
 - concurrency: 5
   ramp-up: 1s
   hold-for: 60s
-  scenario: low
-- concurrency: 15
-  ramp-up: 1s
-  hold-for: 60s
-  delay: 60s
-  scenario: med
-- concurrency: 25
-  ramp-up: 1s
-  hold-for: 60s
-  delay: 2m
-  scenario: high
+  scenario: load
 
 scenarios:
-  low:
+  load:
     timeout: 30s
     retrieve-resources: false
     requests:
     - label: low
       url: https://qa-www.readytalk.com/
-  med:
-    timeout: 30s
-    retrieve-resources: false
-    requests:
-    - label: med
-      url: https://qa-www.readytalk.com/
-  high:
-    timeout: 30s
-    retrieve-resources: false
-    requests:
-    - label: high
-      url: https://qa-www.readytalk.com/
- 

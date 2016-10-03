@@ -1,0 +1,7 @@
+*.idea
+*.iml
+*.directory
+
+results
+testResults
+2016*

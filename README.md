@@ -1,15 +1,13 @@
 # Docker container for load testing websites
-This will run a low(5), medium(15) and high(25) load test for 3 minutes based off variable passed through at runtime.  Results are available in a /results folder.
+This will run a load test with env variables of url(https://qa-www.readytalk.com/blog), users(5), and length(60s).  Results are available in a /testResults/loadResults folder.
 
-Pass/Fail criteria:
-average response time under Low Load of under 10s for 10s
-average response time under Medium Load of under 20s for 20s
-average response time under High Load of under 30s for 30s
+# Pass/Fail criteria:
+average response time under load of under 10s for 10s
 any 400 error codes
 any 500 error codes
 100% success responses
 
 
 # Step 1 : pull/start container
-docker run -e test={https://qa-www.readytalk.com/blog} -v $(pwd)/results:/results --rm -it mstrenz/taurus-load
+docker run -e test=https://qa-www.readytalk.com/blog -e users=5 -e length=60s -v $(pwd)/testResults/loadResults:/results --rm -it mstrenz/taurus-load:latest
 

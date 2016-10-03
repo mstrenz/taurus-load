@@ -6,8 +6,10 @@ RUN apt-get update && apt-get install -y vim xvfb python3 default-jre-headless p
 RUN pip3 install bzt
 RUN pip3 install --upgrade bzt
 RUN rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/*
-ENV test https://qa-www.readytalk.com/
 
+ENV url https://qa-www.readytalk.com/
+ENV users 5
+ENV length 60s
 
 COPY quick_test.yml /root/
 COPY site_test.yml /root/
@@ -21,7 +23,8 @@ RUN ln -s .bzt/jmeter-taurus/bin/jmeter-server
 VOLUME /results
 
 CMD bzt \
-    -o scenarios.low.requests="['${test}']" \
-    -o scenarios.med.requests="['${test}']" \
-    -o scenarios.high.requests="['${test}']" site_test.yml
+    -o scenarios.load.requests="['${url}']" \
+    -o modules.console.disable=true \
+    -o execution.0.concurrency=${users} \
+    -o execution.0.hold-for=${length} site_test.yml 
  
