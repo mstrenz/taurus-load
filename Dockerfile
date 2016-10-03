@@ -10,12 +10,15 @@ RUN rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/*
 ENV url https://qa-www.readytalk.com/
 ENV users 5
 ENV length 60s
+RUN mkdir /tmp/load
 
-COPY quick_test.yml /root/
-COPY site_test.yml /root/
-WORKDIR /root
+COPY quick_test.yml /tmp/load
+COPY site_test.yml /tmp/load
+
+WORKDIR /tmp/load
 RUN bzt quick_test.yml
-RUN rm -r /root/*-*-*_*-*-*.*
+RUN rm -r /tmp/load/*-*-*_*-*-*.*
+WORKDIR /root
 RUN chmod a+x .bzt/jmeter-taurus/bin/jmeter .bzt/jmeter-taurus/bin/jmeter-server .bzt/jmeter-taurus/bin/*.sh
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter-server
