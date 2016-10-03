@@ -22,7 +22,7 @@ WORKDIR /root
 RUN chmod a+x .bzt/jmeter-taurus/bin/jmeter .bzt/jmeter-taurus/bin/jmeter-server .bzt/jmeter-taurus/bin/*.sh
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter-server
-
+WORKDIR /tmp/load
 VOLUME /results
 
 CMD bzt \
