@@ -12,17 +12,15 @@ ENV users 5
 ENV length 60s
 RUN mkdir /tmp/load
 
-COPY quick_test.yml /tmp/load
-COPY site_test.yml /tmp/load
+COPY quick_test.yml /root/
+COPY site_test.yml /root/
 
-WORKDIR /tmp/load
+WORKDIR /root/
 RUN bzt quick_test.yml
-RUN rm -r /tmp/load/*-*-*_*-*-*.*
-WORKDIR /root
+RUN rm -r /root/*-*-*_*-*-*.*
 RUN chmod a+x .bzt/jmeter-taurus/bin/jmeter .bzt/jmeter-taurus/bin/jmeter-server .bzt/jmeter-taurus/bin/*.sh
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter
 RUN ln -s .bzt/jmeter-taurus/bin/jmeter-server
-WORKDIR /tmp/load
 VOLUME /results
 
 CMD bzt \
