@@ -9,5 +9,5 @@ any 500 error codes
 
 
 # Step 1 : pull/start container
-docker run -e test=https://qa-www.readytalk.com/blog -e users=5 -e length=60s -v $(pwd)/testResults/loadResults:/results --rm -it mstrenz/taurus-load:latest
+docker run -e test=https://qa-www.readytalk.com/blog -e users=5 -e length=1m -v $(pwd)/testResults/loadResults:/results --rm -it mstrenz/taurus-load:latest
 
