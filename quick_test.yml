@@ -13,4 +13,4 @@ execution:
 scenarios:
   quick-test:
     requests:
-    - url: https://qa-www.readytalk.com/ 
+    - url: https://www.example.com/

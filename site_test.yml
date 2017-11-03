@@ -30,4 +30,4 @@ scenarios:
     retrieve-resources: false
     requests:
     - label: low
-      url: https://qa-www.readytalk.com/
+      url: https://www.example.com/
